@@ -1,0 +1,125 @@
+/* Fundament: Einheitliche Box-Modell-Strategie */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Allgemeines Layout */
+body {
+  font-family: Arial, Helvetica, sans-serif; /* Unternehmensstandard */
+  margin: 0;
+  padding: 0;
+  background: #fff;
+}
+
+h1 {
+  text-align: center;
+  margin-top: 48px;
+  margin-bottom: 48px;
+  font-size: 2.5em; /* 75% größer als Basis */
+  font-weight: normal;
+}
+
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+  /* Um Flows bei Floats zu regeln */
+  overflow: hidden;
+}
+
+/* Grundstruktur der Menükarten */
+.menu-item {
+  position: relative;
+  background: #aaa;
+  border: 1px solid #222;
+  margin: 16px;
+  padding: 40px 16px 16px 16px; /* Oben Platz für Titel */
+  min-height: 160px;
+  float: left;
+  width: 31.333%; /* 3 Karten nebeneinander mit Abstand */
+  box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+}
+
+/* Spezifische Farben für Titelbereiche */
+.menu-title {
+  position: absolute;
+  top: 0;
+  right: 0;
+  min-width: 120px;
+  padding: 8px 24px 8px 16px;
+  border: 1px solid #222;
+  border-right: none;
+  border-top: none;
+  font-size: 1.25em; /* 25% größer als Text */
+  font-weight: bold;
+  text-align: right;
+  background: #eee;
+  color: #222;
+}
+
+.menu-item.chicken .menu-title {
+  background: #e8b1af; /* leichtes rosa */
+}
+.menu-item.beef .menu-title {
+  background: #c36969; /* leichtes rot */
+  color: #fff;
+}
+.menu-item.sushi .menu-title {
+  background: #f4e2a0; /* leichtes gelb */
+}
+
+/* Textbereich */
+.menu-content {
+  color: #222;
+  font-size: 1em;
+  line-height: 1.4;
+}
+
+/* --- Responsive Breakpoints --- */
+
+/* Tablet: 2 Karten oben, 1 unten */
+@media (max-width: 991px) and (min-width: 768px) {
+  .menu-item {
+    width: 47%;
+    margin: 16px 1.5% 16px 1.5%;
+    float: left;
+  }
+  .menu-item:nth-child(3) {
+    width: 97%;
+    margin: 16px 1.5% 16px 1.5%;
+    clear: both;
+  }
+}
+
+/* Mobile: alle untereinander */
+@media (max-width: 767px) {
+  .container {
+    width: 98%;
+    margin: 0 auto;
+  }
+  .menu-item {
+    width: 98%;
+    float: none;
+    margin: 16px auto;
+    min-width: 0;
+    max-width: 100%;
+  }
+  .menu-title {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: auto;
+    min-width: 120px;
+  }
+}
+
+/* Sicherstellen, dass float aufgehoben wird */
+@media (min-width: 768px) {
+  .container::after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
